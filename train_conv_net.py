@@ -3,7 +3,7 @@ import time
 import read_data
 import numpy as np
 import cv2
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 def conv2d(x, W):
   """conv2d returns a 2d convolution layer with full stride."""
@@ -104,8 +104,8 @@ with mygraph.as_default():
     cross_entropy = tf.reduce_mean(cross_entropy)
 
     train_step = tf.train.AdamOptimizer(0.001).minimize(cross_entropy)
-    true_negatives = tf.greater(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
-    false_positives = tf.less(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
+    true_negatives = tf.count_nonzero(tf.greater(tf.argmax(y_conv, 1), tf.argmax(y_, 1)))
+    false_positives = tf.count_nonzero(tf.less(tf.argmax(y_conv, 1), tf.argmax(y_, 1)))
     #correct_prediction = tf.cast(correct_prediction, tf.float32)
     #accuracy = tf.reduce_mean(correct_prediction)
     saver = tf.train.Saver()
@@ -117,23 +117,23 @@ batch_size = 50
 with tf.Session(graph=mygraph) as sess:
     sess.run(tf.global_variables_initializer())
 
-    plt.ion()
+    #plt.ion()
 
     for i in range(5000):
       batch_data = X[(i*batch_size)%(l_data - batch_size) : (i*batch_size)%(l_data - batch_size) + 50]
       batch_labels = Y[(i*batch_size)%(l_data - batch_size) : (i*batch_size)%(l_data - batch_size) + 50]
       #batch = mnist.train.next_batch(batch_size)
       if i % 2 == 0:
-        train_accuracy = accuracy.eval(feed_dict={x: batch_data, y_: batch_labels, keep_prob: 1.0})
+        #train_accuracy = accuracy.eval(feed_dict={x: batch_data, y_: batch_labels, keep_prob: 1.0})
 
         _, loss, pred, lbl = sess.run([train_step, cross_entropy, y_conv, y_], feed_dict={x: batch_data, y_: batch_labels, keep_prob: 1.0})
         print i, loss
 
-        plt.figure(1)
-        plt.scatter(i, loss)
+        #plt.figure(1)
+        #plt.scatter(i, loss)
         #plt.figure(2)
         #plt.scatter(step, 100.0 - acc_v)
-        plt.pause(0.05)
+        #plt.pause(0.05)
 
     print true_negatives.eval(feed_dict={x: X_test, y_: Y_test, keep_prob: 1.0})
     print false_positives.eval(feed_dict={x: X_test, y_: Y_test, keep_prob: 1.0})
