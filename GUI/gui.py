@@ -23,7 +23,7 @@ class GUI(QtWidgets.QWidget):
 
     updGUI = QtCore.pyqtSignal()
 
-    def __init__(self, parent=None):
+    def __init__(self, cfgPath, parent=None):
         ''' GUI class creates the GUI that we're going to use to
         preview the live video as well as the results of the real-time
         classification.
@@ -76,7 +76,7 @@ class GUI(QtWidgets.QWidget):
 
 
         try:
-            cfg = config.load(sys.argv[1])
+            cfg = config.load(cfgPath)
         except IndexError:
             raise SystemExit('Missing YML file. Usage: python2 objectdetector.py objectdetector.yml')
 

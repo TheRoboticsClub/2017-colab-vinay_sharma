@@ -25,18 +25,20 @@ import comm
 
 class Camera:
 
-    def __init__ (self):
+    def __init__ (self, cfgPath):
         ''' Camera class gets images from live video and transform them
         in order to predict the digit in the image.
         '''
         status = 0
 
+        print "in cam"
+        print cfgPath
         # Creation of the camera through the comm-ICE proxy.
         try:
-            cfg = config.load(sys.argv[1])
+            cfg = config.load(cfgPath)
         except IndexError:
             raise SystemExit('Missing YML file. Usage: python2 objectdetector.py objectdetector.yml')
-        
+
         jdrc = comm.init(cfg, 'ObjectDetector')
 
 
@@ -51,7 +53,7 @@ class Camera:
                 self.im = self.cam.getImage()
                 self.im_height = self.im.height
                 self.im_width = self.im.width
-                
+
                 print('Image size: {0}x{1} px'.format(
                         self.im_width, self.im_height))
             else:
