@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 2.8)
+project( python_embedding )
+
+find_package( PythonInterp REQUIRED )
+find_package( PythonLibs REQUIRED )
+add_executable( python_embed master.cpp )
+MESSAGE(${PYTHON_INCLUDE_DIRS})
+include_directories ( ${PYTHON_INCLUDE_DIRS} )
+target_link_libraries(python_embed ${PYTHON_LIBRARIES})
+# CONFIGURE_FILE(${PATH_TO_SOURCE}GetHostname.py ${PATH_TO_BUILD}GetHostname.py COPYONLY)
