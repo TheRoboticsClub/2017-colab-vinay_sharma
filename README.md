@@ -1,22 +1,17 @@
 # Human Detector
 
-A Covolutional Neural Network consisting of 2 Convolution layer with max pooling and a neural network layer for binary classification of Humans using the INRIA Dataset.
+This tool has been updated to detect people using c++ which calls tensorflow nad then detects people.
+To run this tool, go to the root directory of this repository and run:
+```
+cmake .
+make
+```
+After this you will have a ```detector``` executable. Run it to see the results.
+```
+./detector persondetector.yml
+```
 
-### Test Results
+You will then see a GUI which will show you live detections.
+Also, don't forget to uncompress the model file in Net folder.
 
-| Total Positive Samples     | 1126    |
-| :--------------------:     |:-------:|
-| **Total Negative Samples** | **453** |
-| True Positives             | 1099    |
-| True Negatives             |  405    |
-| False Positives            |  48     |
-| False Negatives            |  27     |
-
-
-Precision: 0.9581 <br>
-Recall: 0.9760
-
-**F1 Score** : 0.9669
-
-
-This is a pre-eliminary classifier, it will be further improved by using Hard Negative Mining.
+The Detector has also been updated to use a self trained model using Imagenet dataset from ILSVRC2014 challenge.
