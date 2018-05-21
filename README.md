@@ -1,4 +1,8 @@
-# Human Detector
+### Update
+Also Contains code for parsing json files, primarily to add dataset support for more datasets in DetectionSuite.
+Uses standard C++ library boost/property_tree for the same.
+Link to [Documnetation](https://www.boost.org/doc/libs/1_67_0/doc/html/property_tree/accessing.html)
+### Human Detector
 
 This tool has been updated to detect people using c++ which calls tensorflow nad then detects people.
 To run this tool, go to the root directory of this repository and run:
