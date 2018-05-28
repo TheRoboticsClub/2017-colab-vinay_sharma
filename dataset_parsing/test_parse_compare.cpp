@@ -1,13 +1,11 @@
-#include "rapidjson/document.h"
-#include "rapidjson/prettywriter.h"
-#include "rapidjson/stringbuffer.h"
+#include "rapidjson_1/document.h"
+#include "rapidjson_1/stringbuffer.h"
 #include "single_json/json.hpp"
 #include <stdio.h>
 #include <iostream>
 #include <sstream>
 #include <fstream>
 
-using namespace rapidjson;
 using namespace std;
 
 int main() {
@@ -26,7 +24,7 @@ else {
 
 cout << "here"  << endl;
 
-Document doc;
+rapidjson::Document doc;
 
 clock_t begin_time = clock();
 
@@ -35,6 +33,25 @@ cout << "Starting Timer" << endl;
 
 if (doc.Parse<0>(ss.str().c_str()).HasParseError())
   throw std::invalid_argument("json parse error");
+
+
+
+if (doc.Parse<0>(ss.str().c_str()).HasParseError())
+        throw std::invalid_argument("json parse error");
+
+    if(!doc.HasMember("annotations"))
+        throw std::invalid_argument("Invalid Annotations file Passed");
+
+    const rapidjson::Value& a = doc["annotations"];
+
+    if(!a.IsArray())
+        throw std::invalid_argument("Invalid Annotations file Passed");
+
+    for (rapidjson::Value::ConstValueIterator itr = a.Begin(); itr != a.End(); ++itr)
+        std::cout << (*itr)["area"].GetDouble() << '\n';
+
+
+
 
 cout << float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
