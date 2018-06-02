@@ -40,6 +40,7 @@ void debug_settings::load(const std::string &filename)
     BOOST_FOREACH(pt::ptree::value_type &v, tree.get_child("debug.modules")) {
         // The data function is used to access the data stored in a node.
         m_modules.insert(v.second.data());
+	std::cout << v.second.get<std::string>("module.abcd") << '\n';
     }
 
 }

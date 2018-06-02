@@ -1,7 +1,7 @@
 <debug>
     <filename>debug.log</filename>
     <modules>
-        <module>Finance</module>
+        <module><abcd>Finance</abcd></module>
         <module>Admin</module>
         <module>HR</module>
     </modules>
