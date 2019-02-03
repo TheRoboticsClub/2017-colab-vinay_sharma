@@ -1,0 +1,5 @@
+camServer:
+  Topic: "camserver/rgb"
+  Uri: "/dev/video0"
+  FrameRate: 12
+  Name: camserver
